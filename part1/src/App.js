@@ -1,32 +1,28 @@
-const Hello = (props) => {
-  return (
-    <div>
-      <p>Hello {props.name}, you are {props.age} years old.</p>
-    </div>
-  )
-}
+// Left off at beginning of     Passing state to child components
 
-const Footer = () => {
-  return (
-    <div>
-      greeting app created by <a href="https://github.com/dredly">dredly</a>
-    </div>
-  )
-}
+import { useState } from "react";
+
+const Display = ({ counter }) => <div>{counter}</div>;
+
+const Button = ({ onClick, text }) => (
+  <button onClick={onClick}>{text}</button>
+);
 
 const App = () => {
-  const name2 = "Mooshie";
-  const age2 = 24;
+  const [counter, setCounter] = useState(0);
+
+  const increaseByOne = () => setCounter(counter + 1);
+  const decreaseByOne = () => setCounter(counter - 1);
+  const zero = () => setCounter(0);
+
   return (
-    <>
-      <h1>Greetings</h1>
-      <div>
-        <Hello name="Miguel" age={12} />
-        <Hello name={name2} age={age2} />
-      </div>
-      <Footer />
-    </>
-  )
+    <div>
+      <Display counter={counter} />
+      <Button onClick={increaseByOne} text="+1" />
+      <Button onClick={decreaseByOne} text="-1" />
+      <Button onClick={zero} text="reset" />
+    </div>
+  );
 }
 
 export default App;
