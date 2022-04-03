@@ -1,4 +1,3 @@
-const { response } = require('express');
 const express = require('express');
 
 const app = express();
@@ -75,6 +74,14 @@ app.delete('/api/notes/:id', (req, res) => {
     notes = notes.filter(n => n.id !== parseInt(id));
     res.status(204).end()
 });
+
+const unknownEndpoint = (req, res) => {
+    res.status(404).send({
+        error: 'Unknown Endpoint'
+    });
+};
+
+app.use(unknownEndpoint);
 
 const PORT = 3001;
 app.listen(PORT, () => {
